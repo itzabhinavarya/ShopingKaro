@@ -1,0 +1,28 @@
+<%- include('../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/add-product.css" />
+</head>
+
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+    <main>
+      <form action="/admin/add-product" method="POST">
+        <div class="form-section">
+          <div class="form-hero">
+            <input type="text" name="title" placeholder="Product Title" />
+          </div>
+          <div class="form-hero">
+            <input type="text" name="imageURL" placeholder="Product Image Url" />
+          </div>
+          <div class="form-hero">
+            <input type="number" name="price" placeholder="Product Price" />
+          </div>
+          <div class="form-hero">
+            <textarea name="description" cols="30" rows="10" placeholder="Product Description"></textarea>
+          </div>
+          <div class="form-button">
+            <button type="submit">Add Product</button>
+          </div>
+        </div>
+      </form>
+    </main>
+    <%- include('../includes/footer.ejs') %>

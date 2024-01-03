@@ -1,0 +1,19 @@
+extends layouts/main-layout.pug 
+
+block content 
+    main 
+        if  prods.length > 0
+            .grid
+                each product in prods
+                    article.card.product-item 
+                        header.card-header 
+                            h1.product-title #{product.title}
+                        .card-image 
+                            img(src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png" alt="A book")
+                        .card-content 
+                            h2.product-price Rs.243
+                            p.product-description Lorem ipsum dolor sit  a de quisquam autemab a odit dolor molestiae.
+                        .card-actions 
+                            button.btn Add to Cart 
+        else 
+            h1 Product list is empty. Add some product

@@ -1,0 +1,5 @@
+.error-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

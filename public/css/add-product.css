@@ -1,0 +1,38 @@
+.form-hero p {
+  font-weight: bold;
+}
+.form-hero input,textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  display: flex;
+  font-size: 14px;
+  border: 2px solid #b4b4b4;
+  border-radius: 2px;
+}
+
+.form-hero input::placeholder{
+  font-size: 15px;
+}
+/* .form-section {
+  display: flex;
+} */
+.form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-button button {
+  padding: 10px 15px;
+  background-color: greenyellow;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+.form-button button:hover {
+  color: greenyellow;
+  background-color: black;
+  transition: 0.3s all ease-in;
+}

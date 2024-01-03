@@ -1,0 +1,14 @@
+extends layouts/main-layout.pug 
+
+block styles 
+    link(rel="stylesheet" href="/css/add-product.css")
+
+block content 
+    main 
+        form(action="/admin/add-product", method="POST")
+            .form-section
+                .form-hero 
+                    p Title 
+                    input(type="text", name="title" placeholder="Enter Products")
+                .form-button 
+                    button(type="submit") Add Product

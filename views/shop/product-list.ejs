@@ -1,0 +1,41 @@
+<%- include('../includes/header.ejs') %>
+</head>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+    <main>
+      <div class="product-card">
+      <% if(prods.length > 0) { %>
+      <div class="grid">
+        <% for(let product of prods) { %>
+        <article class="card">
+          <header class="card-header">
+            <h1 class="product-title"><%= product.title %></h1>
+          </header>
+          <div class="card-image">
+            <img
+              src="<%=product.imageURL%>"
+              alt=""
+            />
+          </div>
+          <div class="card-content">
+            <h2 class="product-price">Rs.<%= product.price %></h2>
+            <p class="product-description"><%= product.description %></p>
+          </div>
+          <div class="card-actions">
+            <a href="/products/<%= product.id %>"><button class="btn">Details</button></a>
+            <form action="/cart" method="POST">
+                <button class="btn" type="submit">Add to cart</button>
+                <input type="hidden" name="productId" value="<%= product.id %>">
+            </form>
+          </div>
+        </article>
+        <%}%>
+      </div>
+      <% } else { %>
+      <div>
+        <h2>Product list is empty. Add some product</h2>
+      </div>
+      <% } %>
+    </div>
+    </main>
+    <%- include('../includes/footer.ejs') %>
