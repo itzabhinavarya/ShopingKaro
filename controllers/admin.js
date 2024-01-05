@@ -1,4 +1,7 @@
+const mongodb = require("mongodb");
 const Product = require("../models/product");
+
+const ObjectId = mongodb.ObjectId;
 
 exports.getAddProduct = (req, res, next) => {
   // res.sendFile(path.join(rootDir, "views", "add-product.html"));
@@ -18,9 +21,8 @@ exports.postAddProduct = (req, res, next) => {
 
   product
     .save()
-    .then((result) => {
-      console.log(result);
-      console.log("Created Product");
+    .then(() => {
+      console.log("Product Added Product");
       res.redirect("/admin/products");
     })
     .catch((err) => {
@@ -37,7 +39,7 @@ exports.getEditProduct = (req, res, next) => {
     return res.redirect("/");
   }
   const pId = req.params.prodId;
-  Product.getProductById(pId, (product) => {
+  Product.getProductById(pId).then((product) => {
     if (!product) {
       return res.redirect("/");
     }
@@ -57,15 +59,24 @@ exports.postEditProduct = (req, res, next) => {
   const updatedImageURL = req.body.imageURL;
   const updatedDescription = req.body.description;
   const updatedPrice = req.body.price;
-  const updatedProduct = new Product(
-    prodId,
+
+  const product = new Product(
     updatedTitle,
-    updatedImageURL,
+    updatedPrice,
     updatedDescription,
-    updatedPrice
+    updatedImageURL,
+    new ObjectId(prodId)
   );
-  updatedProduct.save();
-  res.redirect("/admin/products");
+
+  product
+    .save()
+    .then((result) => {
+      console.log("Product Updated Successfully...");
+      res.redirect("/admin/products");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getProduct = (req, res, next) => {
@@ -79,6 +90,8 @@ exports.getProduct = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteById(prodId);
-  res.redirect("/admin/products");
+  Product.deleteById(prodId).then(() => {
+    console.log("Product Deleted Successfully...");
+    res.redirect("/admin/products");
+  });
 };

@@ -15,13 +15,13 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.getProduct = (req, res, next) => {
-  const productId = req.params.productId;
-  Product.getProductById(productId, (product) => {
+  const prodId = req.params.productId;
+  Product.getProductById(prodId).then((product)=>{
     res.render("shop/product-details", {
       product: product,
       pageTitle: product.title,
     });
-  });
+  })
 };
 
 exports.getIndex = (req, res, next) => {

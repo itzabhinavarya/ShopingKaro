@@ -22,10 +22,10 @@
             <p class="product-description"><%= product.description %></p>
           </div>
           <div class="card-actions">
-            <a href="/products/<%= product.id %>"><button class="btn">Details</button></a>
+            <a href="/products/<%= product._id %>"><button class="btn">Details</button></a>
             <form action="/cart" method="POST">
                 <button class="btn" type="submit">Add to cart</button>
-                <input type="hidden" name="productId" value="<%= product.id %>">
+                <input type="hidden" name="productId" value="<%= product._id %>">
             </form>
           </div>
         </article>
