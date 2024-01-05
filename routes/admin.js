@@ -19,6 +19,3 @@ router.post('/delete-product',adminController.postDeleteProduct)
 module.exports = router;
 // exports.routes = router;
 // exports.products = products;
-
-
-// 4mvkOT2UDq8KlHYO
