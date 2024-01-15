@@ -54,25 +54,51 @@ exports.postCart = (req, res, next) => {
   // console.log(prodId);
 };
 
+exports.postCartDelete = (req, res, next) => {
+  const prodId = req.body.productId;
+  req.user
+    .deleteItemFromCart(prodId)
+    .then((result) => {
+      res.redirect("/cart");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 exports.getCart = (req, res, next) => {
   req.user
     .getCart()
     .then((products) => {
-      console.log(products);
       res.render("shop/cart", {
         pageTitle: "My Cart",
         products: products,
       });
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
     });
 };
 
-exports.checkout = (req, res, next) => {
-  res.render("shop/checkout", { pageTitle: "Checkout" });
+exports.postOrder = (req, res, next) => {
+  req.user
+    .addOrder()
+    .then((result) => {
+      // res.render("shop/checkout", { pageTitle: "Checkout" });
+      res.redirect("/orders");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getOrders = (req, res, next) => {
-  res.render("shop/orders", { pageTitle: "My Orders" });
+  req.user
+    .getOrders()
+    .then((orders) => {
+      res.render("shop/orders", { pageTitle: "My Orders", orders: orders });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

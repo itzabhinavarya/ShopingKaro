@@ -1,8 +1,33 @@
 <%- include('../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/order.css">
 </head>
   <body>
     <%- include('../includes/navbar.ejs') %>
     <main>
-      <h2>This is Order page</h2>
+      <h2>My Orders</h2>
+      <hr>
+      <% if (orders.length > 0) { %>
+        <% orders.forEach(order => { %>
+          <div class="order">
+            <h3>Order - #<%= order._id %></h3>
+            <div class="order-items">
+              <% order.items.forEach(product => { %>
+                <div class="order-details">
+                  <div class="order-image">
+                    <img src=<%= product.imageURL %> alt="">
+                  </div>
+                  <div class="order-desc">
+                    <h3><%= product.title %></h3>
+                    <p>Qty : <%= product.quantity %></p>
+                    <p>Price : Rs.<%= product.price %></p>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <h3>Oopss...! No orders available</h3>
+      <% } %>
     </main>
     <%- include('../includes/footer.ejs') %>

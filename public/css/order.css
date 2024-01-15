@@ -1,0 +1,27 @@
+.order{
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: rgb(179, 179, 179);
+}
+
+.order-items{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-details{
+    display: flex;
+    gap: 15px;
+}
+
+.order-image img{
+    width: 70px;
+    display: flex;
+}
+
+.order-desc p{
+    font-size: 16px;
+    font-weight: bold;
+}
