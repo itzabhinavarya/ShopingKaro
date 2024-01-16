@@ -1,7 +1,5 @@
 # ShopingKaro
 
-![ShopingKaro Logo](path/to/logo.png)
-
 ShopingKaro is a web application developed in Node.js that allows users to easily browse and shop for various products. With a user-friendly interface and a variety of features, ShopingKaro aims to provide a seamless online shopping experience.
 
 ## Table of Contents
@@ -44,3 +42,22 @@ ShopingKaro is a web application developed in Node.js that allows users to easil
 
    ```bash
    npm run start
+
+Open your browser and visit http://localhost:3000 to access ShopingKaro.
+
+Explore the website, add products to your cart, and enjoy a seamless shopping experience.
+
+## Contributing
+
+If you'd like to contribute to ShopingKaro, please follow these guidelines:
+
+- Fork the repository on GitHub.
+- Clone your forked repository to your local machine.
+- Create a new branch for your feature or bug fix.
+- Make your changes and commit them with descriptive commit messages.
+- Push your changes to your forked repository.
+- Create a pull request to the main repository.
+
+## License
+
+This project is licensed under the MIT License. Feel free to use, modify, and distribute it as per the license terms.
