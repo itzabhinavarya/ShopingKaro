@@ -1,5 +1,5 @@
 {
-  "name": "secondstagewithexpress",
+  "name": "shopingkaro",
   "version": "1.0.0",
   "description": "Learning Node.js using express in this project.",
   "main": "index.js",
@@ -7,7 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "author": "Abhinav Arya",
+  "author": {
+    "name" : "Abhinav Kumar Arya",
+    "github" : "www.github.com/itzabhinavarya",
+    "twitter" : "www.twitter.com/itzabhinavarya",
+    "Youtube" : "https://www.youtube.com/channel/UCuKCJgq0NIUuFbdkLOCBe8A",
+    "email": "itzabhinavarya@gmail.com",
+    "Portfolio" : "itzabhinavarya.netlify.app"
+  },
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.1"
