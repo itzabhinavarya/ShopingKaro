@@ -38,7 +38,16 @@ ShopingKaro is a web application developed in Node.js that allows users to easil
    ```bash
    npm install
 
-3. Run :
+5. Setup MongoDB
+
+   - Go to helper/database.js
+   - Create a database in MongoDb
+   - Add a user and password in <yourDBUser> : <password> in below connection string.
+
+   ```
+   "mongodb+srv://<yourDBUser>:<password>@cluster0.ajqdph4.mongodb.net/?retryWrites=true&w=majority",
+
+4. Run :
 
    ```bash
    npm run start
