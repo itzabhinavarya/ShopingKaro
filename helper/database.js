@@ -11,7 +11,7 @@ let _db;
 
 const mongoConnect = (callback) => {
   MongoClient.connect(
-    "mongodb+srv://devadmin:abhi12345@cluster0.ajqdph4.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://<yourdbname>:<yourpassword>@cluster0.ajqdph4.mongodb.net/?retryWrites=true&w=majority",
     options
   )
     .then((client) => {
