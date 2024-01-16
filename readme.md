@@ -2,7 +2,7 @@
 
 ![ShopingKaro Logo](path/to/logo.png)
 
-ShopingKaro is a web application that allows users to easily browse and shop for various products. With a user-friendly interface and a variety of features, ShopingKaro aims to provide a seamless online shopping experience.
+ShopingKaro is a web application developed in Node.js that allows users to easily browse and shop for various products. With a user-friendly interface and a variety of features, ShopingKaro aims to provide a seamless online shopping experience.
 
 ## Table of Contents
 
@@ -19,7 +19,6 @@ ShopingKaro is a web application that allows users to easily browse and shop for
 - **Product Browsing:** Browse through a wide range of products conveniently categorized for quick access.
 - **Cart Management:** Add and remove items from the shopping cart with real-time updates.
 - **Responsive Design:** ShopingKaro is optimized for various devices, ensuring a seamless experience on desktops, tablets, and mobile phones.
-- **Search Functionality:** Quickly find products using the search feature with auto-suggestions.
 
 ## Tech Stack
 
@@ -35,3 +34,13 @@ ShopingKaro is a web application that allows users to easily browse and shop for
 
    ```bash
    git clone https://github.com/your-username/ShopingKaro.git
+
+2. Install dependency:
+
+   ```bash
+   npm install
+
+3. Run :
+
+   ```bash
+   npm run start
