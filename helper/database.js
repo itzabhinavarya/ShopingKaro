@@ -11,7 +11,7 @@ let _db;
 
 const mongoConnect = (callback) => {
   MongoClient.connect(
-    "mongodb+srv://<usernameDB>:<password>@cluster0.ajqdph4.mongodb.net/?retryWrites=true&w=majority", // MongoDB URI
+    "mongodb+srv://<yourDBUser>:<password>@cluster0.ajqdph4.mongodb.net/?retryWrites=true&w=majority", // MongoDB URI
     options
   )
     .then((client) => {

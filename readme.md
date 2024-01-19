@@ -40,7 +40,7 @@ ShopingKaro is a web application developed in Node.js that allows users to easil
 
 5. Setup MongoDB
 
-   - Go to helper/database.js
+   - Go to .env file
    - Create a database in MongoDb
    - Add a user and password in &lt;yourDBUser&gt; : &lt;password&gt; in below connection string.
 
