@@ -12,12 +12,12 @@
           <div class="cart">
             <ul>
               <div class="cart-image">
-                <li><img src=<%= product.imageURL %> alt=""></li>
+                <li><img src=<%= product.productId.imageURL %> alt=""></li>
               </div>
               <div class="cart-item-details">
                 <div class="cart-item-title">
                   <li>
-                    <p><%= product.title %></p>
+                    <p><%= product.productId.title %></p>
                   </li>
                 </div>
                 <li>
@@ -37,10 +37,10 @@
             </ul>
             <div class="cart-delete">
               <div class="price">
-                <p>Rs. <%= product.price %></p>
+                <p>Rs. <%= product.productId.price %></p>
               </div>
               <form action="/cart-delete-item" method="POST">
-                <input type="hidden" value="<%= product._id %>" name="productId">
+                <input type="hidden" value="<%= product.productId._id %>" name="productId">
                 <div class="cart-btn cart-delete-btn">
                   <button type="submit">Delete</button>
                 </div>

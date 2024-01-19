@@ -11,15 +11,15 @@
           <div class="order">
             <h3>Order - #<%= order._id %></h3>
             <div class="order-items">
-              <% order.items.forEach(product => { %>
+              <% order.products.forEach(p => { %>
                 <div class="order-details">
                   <div class="order-image">
-                    <img src=<%= product.imageURL %> alt="">
+                    <img src=<%= p.product.imageURL %> alt="">
                   </div>
                   <div class="order-desc">
-                    <h3><%= product.title %></h3>
-                    <p>Qty : <%= product.quantity %></p>
-                    <p>Price : Rs.<%= product.price %></p>
+                    <h3><%= p.product.title %></h3>
+                    <p>Qty : <%= p.quantity %></p>
+                    <p>Price : Rs.<%= p.product.price %></p>
                   </div>
                 </div>
               <% }) %>

@@ -1,22 +1,47 @@
 const { redirect } = require("react-router");
 const Product = require("../models/product");
 const Cart = require("../models/cart");
+const Order = require("../models/order");
 
 exports.getProducts = (req, res, next) => {
   //   console.log(adminData.products);
   //   res.sendFile(path.join(rootDir, "views", "shop.html"));
   //   const products = adminData.products;
-  Product.fetchAll((products) => {
-    res.render("shop/product-list", {
-      prods: products,
-      pageTitle: "All Products",
+
+  // ---------- With MongoDB -------------
+  // Product.fetchAll((products) => {
+  //   res.render("shop/product-list", {
+  //     prods: products,
+  //     pageTitle: "All Products",
+  //   });
+  // });
+
+  // ---------- With Mongoose -------------
+  Product.find()
+    .then((products) => {
+      res.render("shop/product-list", {
+        prods: products,
+        pageTitle: "All Products",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.getProductById(prodId).then((product) => {
+
+  // ---------- With MongoDB -------------
+  // Product.getProductById(prodId).then((product) => {
+  //   res.render("shop/product-details", {
+  //     product: product,
+  //     pageTitle: product.title,
+  //   });
+  // });
+
+  // ---------- With Mongoose -------------
+  Product.findById(prodId).then((product) => {
     res.render("shop/product-details", {
       product: product,
       pageTitle: product.title,
@@ -29,7 +54,13 @@ exports.getIndex = (req, res, next) => {
   //   res.render("shop/index", { prods: products, pageTitle: "Shop" });
   // });
 
-  Product.fetchAll((products) => {
+  // ---------- With MongoDB -------------
+  // Product.fetchAll((products) => {
+  //   res.render("shop/index", { prods: products, pageTitle: "Shop" });
+  // });
+
+  // ---------- With Mongoose -------------
+  Product.find().then((products) => {
     res.render("shop/index", { prods: products, pageTitle: "Shop" });
   });
 };
@@ -40,18 +71,31 @@ exports.getIndex = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.getProductById(prodId)
-    .then((product) => {
-      return req.user.addToCart(product);
-    })
-    .then((result) => {
-      console.log(result);
-      res.redirect("/cart");
-    });
+
+  // ---------- With MongoDB -------------
+  // Product.getProductById(prodId)
+  //   .then((product) => {
+  //     return req.user.addToCart(product);
+  //   })
+  //   .then((result) => {
+  //     console.log(result);
+  //     res.redirect("/cart");
+  //   });
+
+  // ----------------------Not this one-----------------
   // Product.getProductById(prodId, (product) => {
   //   Cart.addproduct(prodId, product.price);
   // });
   // console.log(prodId);
+
+  // ---------- With Mongoose -------------
+  Product.findById(prodId)
+    .then((product) => {
+      return req.user.addToCart(product);
+    })
+    .then((result) => {
+      res.redirect("/cart");
+    });
 };
 
 exports.postCartDelete = (req, res, next) => {
@@ -68,8 +112,10 @@ exports.postCartDelete = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   req.user
-    .getCart()
-    .then((products) => {
+    // .getCart()
+    .populate("cart.items.productId")
+    .then((user) => {
+      const products = user.cart.items;
       res.render("shop/cart", {
         pageTitle: "My Cart",
         products: products,
@@ -82,9 +128,25 @@ exports.getCart = (req, res, next) => {
 
 exports.postOrder = (req, res, next) => {
   req.user
-    .addOrder()
+    .populate("cart.items.productId")
+    .then((user) => {
+      const products = user.cart.items.map((x) => {
+        return { quantity: x.quantity, product: { ...x.productId._doc } };
+      });
+      const order = new Order({
+        user: {
+          name: req.user.name,
+          userId: req.user,
+        },
+        products: products,
+      });
+      order.save();
+    })
     .then((result) => {
+      return req.user.clearCart();
       // res.render("shop/checkout", { pageTitle: "Checkout" });
+    })
+    .then(() => {
       res.redirect("/orders");
     })
     .catch((err) => {
@@ -93,12 +155,25 @@ exports.postOrder = (req, res, next) => {
 };
 
 exports.getOrders = (req, res, next) => {
-  req.user
-    .getOrders()
+  
+  // --------------- By Using MongoDB -------------
+  // req.user
+  //   .getOrders()
+  //   .then((orders) => {
+  //     res.render("shop/orders", { pageTitle: "My Orders", orders: orders });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
+
+    // --------------- By Using Mongoose -------------
+    Order.find({ "user.userId": req.user._id })
     .then((orders) => {
       res.render("shop/orders", { pageTitle: "My Orders", orders: orders });
     })
     .catch((err) => {
       console.log(err);
     });
+
 };

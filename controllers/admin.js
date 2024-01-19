@@ -1,5 +1,6 @@
 const mongodb = require("mongodb");
 const Product = require("../models/product");
+const product = require("../models/product");
 
 const ObjectId = mongodb.ObjectId;
 
@@ -17,7 +18,14 @@ exports.postAddProduct = (req, res, next) => {
   const description = req.body.description;
   const price = req.body.price;
 
-  const product = new Product(title, price, description, imageURL,null,req.user._id);
+  // const product = new Product(title, price, description, imageURL,null,req.user._id);
+  const product = new Product({
+    title: title,
+    price: price,
+    description: description,
+    imageURL: imageURL,
+    userId: req.user,
+  });
 
   product
     .save()
@@ -39,7 +47,7 @@ exports.getEditProduct = (req, res, next) => {
     return res.redirect("/");
   }
   const pId = req.params.prodId;
-  Product.getProductById(pId).then((product) => {
+  Product.findById(pId).then((product) => {
     if (!product) {
       return res.redirect("/");
     }
@@ -60,16 +68,34 @@ exports.postEditProduct = (req, res, next) => {
   const updatedDescription = req.body.description;
   const updatedPrice = req.body.price;
 
-  const product = new Product(
-    updatedTitle,
-    updatedPrice,
-    updatedDescription,
-    updatedImageURL,
-    new ObjectId(prodId)
-  );
+  // ------------------By Using MongoDB --------------------
+  // const product = new Product(
+  //   updatedTitle,
+  //   updatedPrice,
+  //   updatedDescription,
+  //   updatedImageURL,
+  //   new ObjectId(prodId)
+  // );
 
-  product
-    .save()
+  // product
+  //   .save()
+  //   .then((result) => {
+  //     console.log("Product Updated Successfully...");
+  //     res.redirect("/admin/products");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
+  // ------------------By Using Mongoose --------------------
+  Product.findById(prodId)
+    .then((product) => {
+      product.title = updatedTitle;
+      product.price = updatedPrice;
+      product.description = updatedDescription;
+      product.imageURL = updatedImageURL;
+      return product.save();
+    })
     .then((result) => {
       console.log("Product Updated Successfully...");
       res.redirect("/admin/products");
@@ -80,17 +106,29 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProduct = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("admin/products", {
-      prods: products,
-      pageTitle: "Admin Products",
+  Product.find()
+    // .select("title price -_id")
+    // .populate("userId", "name")
+    .then((products) => {
+      console.log(products);
+      res.render("admin/products", {
+        prods: products,
+        pageTitle: "Admin Products",
+      });
     });
-  });
 };
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteById(prodId).then(() => {
+
+  // ------------------By Using MongoDB --------------------
+  // Product.deleteById(prodId).then(() => {
+  //   console.log("Product Deleted Successfully...");
+  //   res.redirect("/admin/products");
+  // });
+
+  // ------------------By Using Mongoose --------------------
+  Product.findByIdAndDelete(prodId).then(() => {
     console.log("Product Deleted Successfully...");
     res.redirect("/admin/products");
   });

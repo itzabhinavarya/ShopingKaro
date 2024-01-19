@@ -8,12 +8,12 @@
     "start": "nodemon index.js"
   },
   "author": {
-    "name" : "Abhinav Kumar Arya",
-    "github" : "www.github.com/itzabhinavarya",
-    "twitter" : "www.twitter.com/itzabhinavarya",
-    "Youtube" : "https://www.youtube.com/channel/UCuKCJgq0NIUuFbdkLOCBe8A",
+    "name": "Abhinav Kumar Arya",
+    "github": "www.github.com/itzabhinavarya",
+    "twitter": "www.twitter.com/itzabhinavarya",
+    "Youtube": "https://www.youtube.com/channel/UCuKCJgq0NIUuFbdkLOCBe8A",
     "email": "itzabhinavarya@gmail.com",
-    "Portfolio" : "itzabhinavarya.netlify.app"
+    "Portfolio": "itzabhinavarya.netlify.app"
   },
   "license": "ISC",
   "devDependencies": {
@@ -21,10 +21,12 @@
   },
   "dependencies": {
     "body-parser": "^1.20.2",
+    "dotenv": "^16.3.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
     "pug": "^3.0.2"
   }
 }
