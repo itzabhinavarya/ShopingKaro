@@ -45,7 +45,7 @@ ShopingKaro is a web application developed in Node.js that allows users to easil
    - Add a user and password in &lt;yourDBUser&gt; : &lt;password&gt; in below connection string.
 
    ```
-   "mongodb+srv://<yourDBUser>:<password>@cluster0.ajqdph4.mongodb.net/?retryWrites=true&w=majority",
+   "mongodb+srv://<yourDBUser>:<password>@<yourDBcluster>/?retryWrites=true&w=majority",
 
 4. Run :
 
