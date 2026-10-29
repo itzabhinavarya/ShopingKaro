@@ -1,0 +1,25 @@
+services:
+  db:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - db_data:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  
+  api:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    command: bash -c "npm install && npm run start"
+
+volumes:
+  db_data:

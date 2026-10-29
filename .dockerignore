@@ -1,0 +1,19 @@
+# .gitignore
+node_modules/
+./helper/database.js
+.env
+terraform/
+.DS_Store
+.vscode/
+dist/
+build/
+coverage/
+npm-debug.log*
+readme.md
+jest.config.js
+jest.setup.js
+docker-compose*
+Dockerfile
+.dockerignore
+.gitignore
+.github/

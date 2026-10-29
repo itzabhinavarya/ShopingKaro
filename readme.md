@@ -7,7 +7,10 @@ ShopingKaro is a web application developed in Node.js that allows users to easil
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Docker Setup](#docker-setup)
+- [Testing](#testing)
+- [CI/CD Pipeline](#cicd-pipeline)
+- [Infrastructure as Code](#infrastructure-as-code)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -38,23 +41,68 @@ ShopingKaro is a web application developed in Node.js that allows users to easil
    ```bash
    npm install
 
-5. Setup MongoDB
+3. Setup MongoDB
 
    - Go to .env file
-   - Create a database in MongoDb
-   - Add a user and password in &lt;yourDBUser&gt; : &lt;password&gt; in below connection string.
+   - Create a database in MongoDB
+   - Add a user and password in `<yourDBUser>:<password>` in the connection string.
 
    ```
-   "mongodb+srv://<yourDBUser>:<password>@<yourDBcluster>/?retryWrites=true&w=majority",
+   mongodb+srv://<yourDBUser>:<password>@<yourDBcluster>/?retryWrites=true&w=majority
+   ```
 
-4. Run :
+4. Run:
 
    ```bash
    npm run start
 
 Open your browser and visit http://localhost:3000 to access ShopingKaro.
 
-Explore the website, add products to your cart, and enjoy a seamless shopping experience.
+## Docker Setup
+
+### Local Development with Docker Compose
+
+ShopingKaro includes a `docker-compose.yaml` for local development with Node.js and MongoDB services:
+
+```bash
+docker-compose up
+```
+
+This starts both the Node.js application and MongoDB containers for seamless local development.
+
+### Production Docker Image
+
+The application is containerized using a Dockerfile for production deployments. The DocumentDB certificate is injected into the Docker image during the build process to enable secure connections to the AWS DocumentDB database.
+
+## Testing
+
+ShopingKaro uses **Jest** for unit testing:
+
+```bash
+npm run test
+```
+
+Tests are automatically executed in the CI/CD pipeline to ensure code quality.
+
+## CI/CD Pipeline
+
+ShopingKaro leverages **GitHub Actions** for automated testing, building, and deployment:
+
+- **Test:** Runs Jest test suite on every commit
+- **Build:** Constructs and uploads docker image to Amazon ECR (Elastic Container Registry)
+- **Deploy:** Automatically deploys to AWS ECS (Elastic Container Service)
+
+Workflow file: `.github/workflows/ci-cd.yaml`
+
+## Infrastructure as Code
+
+ShopingKaro uses **Terraform** to provision and manage AWS infrastructure: 
+
+- **ECS:** Container orchestration for application deployment.
+- **DocumentDB:** MongoDB-compatible database service.
+- **IAM:** Identity and access management policies.
+
+For detailed documentation, please refer to the [./terraform/README.md](./terraform/README.md) file.
 
 ## Contributing
 
@@ -70,3 +118,4 @@ If you'd like to contribute to ShopingKaro, please follow these guidelines:
 ## License
 
 This project is licensed under the MIT License. Feel free to use, modify, and distribute it as per the license terms.
+
